@@ -1,0 +1,22 @@
+pragma solidity 0.5.12;
+
+    contract HomeOffice
+{
+    string public Empregadora;
+    
+    string public Empregado;
+    
+    uint256 private valor;
+    
+    constructor(string memory nomeEmpregadora, string memory nomeEmpregado) public
+    {
+        Empregadora = nomeEmpregadora;
+        Empregado = nomeEmpregado;
+    
+    }
+   
+    
+    
+    }  
+    
+ 
