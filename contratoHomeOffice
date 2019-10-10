@@ -3,15 +3,23 @@ pragma solidity 0.5.12;
     contract HomeOffice
 {
     string public Empregadora;
-    
     string public Empregado;
+    uint256 public valorSalario;
+    string public Localidade;
+    string public DataInicioContrato;
     
-    uint256 private valor;
-    
-    constructor(string memory nomeEmpregadora, string memory nomeEmpregado) public
+    constructor(string memory _nomeEmpregadora, 
+                string memory _nomeEmpregado, 
+                uint256 _valor, 
+                string memory _Localidade,
+                string memory _DataInicioContrato) public
     {
-        Empregadora = nomeEmpregadora;
-        Empregado = nomeEmpregado;
+        Empregadora = _nomeEmpregadora;
+        Empregado = _nomeEmpregado;
+        valorSalario = _valor;
+        Localidade = _Localidade;
+        DataInicioContrato = _DataInicioContrato;
+        
     
     }
    
