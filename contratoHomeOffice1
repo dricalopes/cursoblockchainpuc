@@ -1,0 +1,58 @@
+pragma solidity 0.5.12;
+
+    contract HomeOffice
+{
+    string public empregadora;
+    string public empregado;
+    uint256 public valorSalario;
+    string public localidade;
+    string public dataInicioContrato;
+    uint256 public valorSalarioMinimo = 998.00;
+    
+    constructor(string memory _nomeEmpregadora, 
+                string memory _nomeEmpregado, 
+                uint256 _valor, 
+                string memory _localidade,
+                string memory _dataInicioContrato) public
+    {
+        require(_valor >= valorSalarioMinimo, "valor tem que ser maior que salario minimo");
+        require(bytes(_nomeEmpregado).length>0, "preencher nome empregado");
+        require(bytes(_nomeEmpregadora).length>0, "preencher nome empresa");
+        require(bytes(_localidade).length>0, "preencher localidade");
+
+        empregadora = _nomeEmpregadora;
+        empregado = _nomeEmpregado;
+        valorSalario = _valor;
+        localidade = _localidade;
+        dataInicioContrato = _dataInicioContrato;
+    }
+    
+    function rejustaSalarioMinimo(uint256 _valor) public
+    {
+        require(_valor >= valorSalarioMinimo, "valor tem que ser maior que salario minimo");
+        valorSalarioMinimo = _valor;
+        
+    }
+    
+    function reajustaValorSalario(uint256 _valor) public
+    {
+        require(_valor >= valorSalario, "valor tem que ser maior que salario atual");
+        require(_valor >= valorSalarioMinimo, "valor tem que ser maior que salario minimo");
+        
+        valorSalario = _valor;
+        
+    }
+    function calculaSalario(uint256 _faltas) public  view returns(uint256)
+    {
+     //se o funcionario faltar mais de um dia tera o DSR descontado
+     if(_faltas > 1){
+         _faltas++; // adicona mais uma _faltas
+     }
+     //uint256 valorDesconto = (valorSalario/30)*_faltas;
+     
+       // return valorSalario - valorDesconto; 
+       return valorSalario - ((valorSalario/30)*_faltas);
+    }
+    
+    
+}
