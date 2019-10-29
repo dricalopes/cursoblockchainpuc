@@ -1,0 +1,62 @@
+pragma solidity 0.5.12;
+
+contract compraVendaImovel
+{
+    //dados do Vendedor
+        string public  nomeVendedor;
+        string public rgVendedor;
+        string public cpfVendedor;
+        address payable carteiraVendedor;
+        event pagamentoRealizado (uint valor);
+
+        
+    //dados do cpfComprador
+        string public nomeComprador;
+        string public rgComprador;
+        string public cpfComprador;
+        address payable carteiraComprador;
+        
+    // dados do imovel
+        string public enderecoImovel;
+        string public nomeProprietarioImovel;
+        uint public valorImovel;
+    
+    function  Etapa1_qualificaVendedor(string memory _nomeVendedor, string memory _rgVendedor, string memory _cpfVendedor, address payable _carteiraVendedor) public {
+        nomeVendedor = _nomeVendedor;
+        rgVendedor = _rgVendedor;
+        cpfVendedor = _cpfVendedor;
+        carteiraVendedor = _carteiraVendedor;
+        nomeProprietarioImovel = _nomeVendedor;
+    }
+    function Etapa2_qualificaComprador(string memory _nomeComprador, string memory _rgComprador, string memory _cpfComprador, address payable _carteiraComprador) public {
+        nomeComprador = _nomeComprador;
+        rgComprador = _rgComprador;
+        cpfComprador = _cpfComprador;
+        carteiraComprador = _carteiraComprador;
+    }
+    function Etapa3_dadosImovel (string memory _enderecoImovel, uint _valorImovel) public {
+        enderecoImovel = _enderecoImovel;
+        valorImovel = _valorImovel;
+    }
+     constructor(
+        address payable _nomeVendedor,
+        address _nomeComprador,
+        uint _valorImovel,
+        uint _dataDePagamento,
+        uint _pagamentoVendedor) public {
+        nomeVendedor = _nomeVendedor;
+        nomeComprador = msg.sender;
+        nomeComprador = _nomeComprador;
+        valorImovel = _valorImovel;
+        dataDeVencimento = now+_dataDePagamento;
+        }
+        
+    function pagamentoDataDePagamento () public payable somenteComprador {
+        require (now <= dataDeVencimento);
+        require (msg.value == valorImovel, "Valor diverso do devido");
+        pago = true;
+        emit pagamentoRealizado(msg.value);
+        nomeVendedor.transfer(valorImovel);
+        
+    
+} 
